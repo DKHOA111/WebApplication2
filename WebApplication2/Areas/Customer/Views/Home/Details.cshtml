@@ -1,0 +1,35 @@
+﻿@model WebApplication2.Models.Cart
+
+<h1>Book Details</h1> 
+<form method="post"> 
+    <div class="row"> 
+        <div class="col-4"> 
+            <img src="~/@Model.Book.ImageUrl" width="210" height="270"/> 
+            <input type="hidden" asp-for="BookId"/> 
+        </div> 
+        <div class="col-8"> 
+            <div class="row">
+                <label asp-for="Book.Name">Book Name:
+                    @Model.Book.Name</label> 
+                <label asp-for="Book.Author">Book Author: 
+                    @Model.Book.Author</label> 
+                <label asp-for="Book.Description">Book Description: 
+                    @Model.Book.Description</label> 
+                <label asp-for="Book.Price">Book Price: 
+                    @Model.Book.Price.ToString("0.00")</label> 
+                <label asp-for="Book.Category.Id">Book Category: 
+                    @Model.Book.Category.Name</label> 
+                <div class="form-control"> 
+                    <label asp-for="Count"></label>
+                    <input asp-for="Count" class="form-control" /> 
+                    <span asp-validation-for="Count" class="text-danger"></span> 
+                </div> 
+                <div class="form-control"> 
+                  <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Back To List</a> 
+                       @* <button type="submit" class="btn btn-dark">Add to Cart</button>*@
+                </div> 
+            </div> 
+        </div> 
+   </div> 
+</form>
+

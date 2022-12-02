@@ -1,0 +1,91 @@
+﻿@model WebApplication2.Data.ViewModels.BookVM 
+
+
+<form method="post" asp-action="CreateUpdate" enctype="multipart/form-data"> 
+	<input type="hidden" asp-for="Book.Id"/> 
+	<input type="hidden" asp-for="Book.ImageUrl"/> 
+	
+	<div class="border p-3 mt-4"> 
+		<div class="row pb-3"> 
+			<h2 class="text-primary">@((Model.Book== null || Model.Book.Id==0)?"Create" : "Update") Book</h2> 
+			<hr/> 
+		</div> 
+		<div asp-validation-summary-All>
+			
+		</div> <div class="row mb-3"> 
+			<label asp-for="Book.Name"></label> 
+			<input asp-for="Book.Name" class="form-control" /> 
+			<span asp-validation-for="Book.Name" class="text-danger"></span> 
+		</div> 
+		<div class="row mb-3"> 
+			<label asp-for="Book.Author"></label> 
+			<input asp-for="Book.Author" class="form-control" /> 
+			<span asp-validation-for="Book.Author" class="text-danger"></span> 
+		</div>
+			<div class="row mb-3"> 
+			<label asp-for="Book.Description"></label> 
+			<textarea asp-for="Book.Description" class="form-control"></textarea> 
+			<span asp-validation-for="Book.Description" class="text-danger"></span> 
+		</div> 
+		<div class="row mb-3"> 
+			<label asp-for="Book.Price" ></label> 
+			<input asp-for="Book. Price" class="form-control" /> 
+			<span asp-validation-for="Book.Price" class="text-danger"></span> 
+		</div> 
+		<div class="row mb-3"> 
+			<label asp-for="Book.ImageUrl"></label> 
+			<input type="file" id="ImageFile" name="file" class="form-select" /> 
+		</div> 
+		<img src="~/@Model.Book.ImageUrl" width="100" height="110"/> 
+		<div class="row mb-3"> 
+			<label asp-for="Book.CategoryID"></label> 
+			<select asp-for="Book.CategoryID" asp-items="@Model.Categories" class="form-control"> 
+				<option selected disabled>--Select Category-- </option> 
+			</select> 
+			<span asp-validation-for="Book.CategoryID" class="text-danger"></span>
+		</div>
+		@if(Model.Book == null || Model.Book.Id ==0)
+		{
+			<button class="btn btn-primary" onclick="return ValidateEmpty()" type ="submit">Create</button>
+		}
+		else
+		{
+			<button class ="btn btn-primary" type ="submit">Update</button>
+		}
+		<li class="nav-item">
+          <a  class="nav-link" asp-area="Admin" asp-action ="Index" asp-controller="Book"  style="color:Goldenrod;">Back To List</a>
+        </li>
+</form>
+
+@section scripts{
+	@{
+	<partial name="_ValidationScriptsPartial"/>
+	}
+	<script>
+
+		//tinymce.init({ 
+		//	selector: 'textarea', 
+		//	plugins: 'allychecker advcode casechange export format painter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+		//	toolbar: 'allycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table', 
+		//	toolbar_mode: 'floating', 
+		//	tinycomments_mode: 'embedded', 
+		//	tinycomments_author: 'Author name', 
+		//}); 
+		
+		
+		function ValidateEmpty() 
+		{ 
+			if (document.getElementById("ImageFile").value=="") 
+			{
+				Swal.fire 
+				({ 
+					icon: 'error', 
+					title: 'Oops...', 
+					text: 'Upload Image '
+				}); return false; 
+			} return true; 
+
+		}
+	</script>
+}
+	

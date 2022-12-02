@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebApplication2.Models.Book>
+
+
+<html>
+<head>
+<style>
+h1 {text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<h1>WELCOME TO FPT BOOK SHOP</h1>
+
+
+</body>
+</html>
+<div class="row pb-4"> 
+
+@foreach (var Book in Model)
+    { 
+        <div class="card" style="width: 16.5rem;"> 
+            <img class="card-img-top" src="~/@Book.ImageUrl" alt="Card image cap">" 
+<div class="card-body"> 
+    <h5 class="card-title">@Book.Name</h5>
+    <p class="card-text">Price: @Book.Price.ToString("0.00")</p> 
+    <a asp-action="Details" asp-controller="Home" asp-route-bookId="@Book.Id" class="btn btn-primary">Details</a> 
+</div> 
+</div>
+    }

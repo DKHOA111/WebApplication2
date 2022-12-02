@@ -1,0 +1,32 @@
+﻿@model WebApplication2.Data.ViewModels.CategoryVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="CreateUpdate" asp-controller="Category">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Display Order</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.categories) {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.DisplayOrder</td>
+            <td role="group">
+                <a asp-action="CreateUpdate" asp-controller="category" asp-route-id="@item.Id">Update</a>
+                <a asp-action="Delete" asp-controller="category" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
